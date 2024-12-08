@@ -1,3 +1,66 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "ignorePatterns": [
+    "dist",
+    ".eslintrc.cjs",
+    "node_modules"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "react",
+    "react-refresh",
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-empty-function": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react-refresh/only-export-components": [
+      "warn",
+      {
+        "allowConstantExport": true
+      }
+    ],
+    "array-element-newline": [
+      "error",
+      "consistent"
+    ],
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": true,
+        "semi": true,
+        "useTabs": false,
+        "tabWidth": 2,
+        "trailingComma": "none",
+        "quoteProps": "as-needed",
+        "printWidth": 150,
+        "endOfLine": "auto",
+        "arrowParens": "always",
+        "htmlWhitespaceSensitivity": "ignore",
+        "spaceBeforeFunctionParen": {
+          "anonymous": "never",
+          "named": "always",
+          "asyncArrow": "always"
+        }
+      }
+    ]
+  }
 }
