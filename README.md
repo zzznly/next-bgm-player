@@ -1,12 +1,12 @@
 # next-bgm-player
-이 프로젝트는 기존에 React.js로 개발했던 [mytones-bgm-player](https://github.com/zzznly/mytones-bgm-player) 를 Next.js로 마이그레이션한 프로젝트입니다.
+기존에 React.js로 개발했던 [mytones-bgm-player](https://github.com/zzznly/mytones-bgm-player) 를 Next.js로 마이그레이션한 프로젝트입니다.
 
 <br/>
 
 ## Dependencies
 
-- React@19
 - Next@15
+- React@19
 - TypeScript@5
 - CSS Modules
 - React-Query@5
