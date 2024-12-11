@@ -1,12 +1,10 @@
-import Image from "next/image";
+import MainLayout from "./Main/layout";
 import styles from "./page.module.scss";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <h2>
-        next-bgm-player
-      </h2>
-    </div>
+    <MainLayout>
+      <div>HOME</div>
+    </MainLayout>
   );
 }
