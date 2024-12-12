@@ -7,7 +7,7 @@ interface IconProps {
     height?: number;
 }
 
-export default function SvgIcon({ name = "favorites", width = 20, height = 20 }: IconProps) {
+export default function SvgIcon({ name, width = 20, height = 20 }: IconProps) {
     return (
         <>
             <Image

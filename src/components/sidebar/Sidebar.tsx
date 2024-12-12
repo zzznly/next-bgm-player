@@ -1,8 +1,8 @@
 "use client";
 
+import styles from "./styles.module.scss";
 import MyTonesLogo from "@/svg/MyTonesLogo";
 import SidebarMenu from "./sidebar-menu/SidebarMenu";
-import styles from "./styles.module.scss";
 
 export interface SidebarMenuItem {
     menu: string;
@@ -67,7 +67,7 @@ export default function Sidebar() {
                         <p className={styles["sidebar-menu-title"]}>{menu}</p>
                         <ul className={styles["sidebar-menu-list"]}>
                             {MENU_LIST[menu as keyof typeof MENU_LIST].map(
-                                (item: SidebarMenuItem, idx: number) => <SidebarMenu {...{ item }} key={idx} />
+                                (item: SidebarMenuItem, idx: number) => <SidebarMenu {...item} key={idx} />
                             )}
                         </ul>
                     </div>

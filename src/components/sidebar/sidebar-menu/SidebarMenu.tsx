@@ -3,16 +3,16 @@ import { SidebarMenuItem } from "../Sidebar";
 import SvgIcon from "@/components/svgIcon/SvgIcon";
 import Link from "next/link";
 
-export default function SidebarMenu({ item }: { item: SidebarMenuItem }) {
+export default function SidebarMenu({ path, icon, menu }: SidebarMenuItem) {
     return (
         <div
             className={styles["sidebar-menu-item"]}
         >
-            <Link href={item.path}>
+            <Link href={path}>
                 <SvgIcon
-                    name={item.icon.name}
+                    name={icon.name}
                 />
-                <span>{item.menu}</span>
+                <span>{menu}</span>
             </Link>
         </div>
     );
