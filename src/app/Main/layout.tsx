@@ -1,5 +1,6 @@
 import styles from "./styles.module.scss";
 import Header from "@/components/header/Header";
+import PlayerPanel from "@/components/player-panel/PlayerPanel";
 import Sidebar from "@/components/sidebar/Sidebar";
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
@@ -11,6 +12,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 {children}
             </div>
         </div>
-        {/* <Player /> */}
+        <PlayerPanel />
     </div>
 }

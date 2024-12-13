@@ -1,0 +1,29 @@
+.playlist {
+    flex: 1;
+    overflow: hidden;
+    border-bottom: 1px solid #e8e8fd;
+
+}
+
+.playlist-wrap {
+    margin-top: 16px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.playlist-title {
+    margin-bottom: 8px;
+    padding: 0 42px 0 24px;
+    color: #24242e;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+}
+
+.playlist-current {
+    height: 104px;
+}
+
+.playlist-queue {
+    margin-top: 16px;
+}
