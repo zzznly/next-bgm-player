@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import MyTonesLogo from "@/svg/MyTonesLogo";
+import TrueTonesLogo from "@/svg/TrueTonesLogo";
 import SidebarMenu from "./sidebar-menu/SidebarMenu";
 
 export interface SidebarMenuItem {
@@ -14,10 +14,16 @@ export interface SidebarMenuItem {
 export const MENU_LIST: { [key: string]: SidebarMenuItem[] } = {
     MENU: [
         {
-            menu: "Home",
+            menu: "Discover",
             path: "/",
-            icon: { name: "explore", category: "navbar" },
-            iconActive: { name: "explore-active", category: "navbar" },
+            icon: { name: "discover", category: "navbar" },
+            iconActive: { name: "discover-active", category: "navbar" },
+        },
+        {
+            menu: "Explorer",
+            path: "/",
+            icon: { name: "explorer", category: "navbar" },
+            iconActive: { name: "explorer-active", category: "navbar" },
         },
         {
             menu: "Search",
@@ -26,18 +32,18 @@ export const MENU_LIST: { [key: string]: SidebarMenuItem[] } = {
             iconActive: { name: "search-active" },
         },
     ],
-    MY: [
+    LIBRARY: [
         {
-            menu: "Playlists",
+            menu: "My Music",
             path: "/my/playlists",
             icon: { name: "playlist", category: "navbar" },
             iconActive: { name: "playlist-active", category: "navbar" },
         },
         {
-            menu: "Favorites",
+            menu: "Albums",
             path: "/my/favorites",
-            icon: { name: "favorites", category: "navbar" },
-            iconActive: { name: "favorites-active", category: "navbar" },
+            icon: { name: "albums", category: "navbar" },
+            iconActive: { name: "albums-active", category: "navbar" },
         },
         {
             menu: "Artists",
@@ -59,7 +65,7 @@ export default function Sidebar() {
     return (
         <div className={styles.sidebar}>
             <div className={styles["sidebar-logo"]}>
-                <MyTonesLogo />
+                <TrueTonesLogo />
             </div>
             <div className={styles["sidebar-menu"]}>
                 {Object.keys(MENU_LIST).map((menu: string, idx: number) =>
