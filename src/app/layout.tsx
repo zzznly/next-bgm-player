@@ -1,6 +1,6 @@
 import "./styles.global.scss";
 import type { Metadata } from "next";
-import { AppStoreProvider } from "@/providers/app";
+import Providers from "@/utils/provider";
 
 export const metadata: Metadata = {
   title: "Truetones Player",
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppStoreProvider>{children}</AppStoreProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
