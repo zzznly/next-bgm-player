@@ -21,7 +21,7 @@ import svgIcon from "@/components/svgIcon/SvgIcon";
 const SKIP_PREV_THRESHOLD = 3000;
 const REPEAT_STATES = ["off", "context", "track"];
 
-export default function PlayerDevice() {
+export default function Player() {
     return (
         <div className={styles["player"]}>
             <h2 className={styles["player-header"]}>NOW PLAYING</h2>

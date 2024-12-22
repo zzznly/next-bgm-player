@@ -21,7 +21,7 @@ export const MENU_LIST: { [key: string]: SidebarMenuItem[] } = {
         },
         {
             menu: "Explorer",
-            path: "/",
+            path: "/explorer",
             icon: { name: "explorer", category: "navbar" },
             iconActive: { name: "explorer-active", category: "navbar" },
         },
