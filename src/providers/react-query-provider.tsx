@@ -7,7 +7,6 @@ import {
   defaultShouldDehydrateQuery,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { AppStoreProvider } from "@/providers/store/app";
 import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experimental";
 
 function makeQueryClient() {
@@ -42,7 +41,7 @@ function getQueryClient() {
   }
 }
 
-export default function ReactQueryProvider({ children }: React.PropsWithChildren) {
+export default function QueryProvider({ children }: React.PropsWithChildren) {
   const queryClient = getQueryClient();
 
   return (
