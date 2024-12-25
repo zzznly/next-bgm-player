@@ -11,9 +11,9 @@ const generateRandomString = (length: number) => {
   return text;
 };
 
-export async function GET() {
+export async function GET(request: Request) {
   const client_id = process.env.SPOTIFY_CLIENT_ID;
-  const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
+  const redirect_uri = `${new URL(request.url).origin}/callback`;
   const state = generateRandomString(16);
   const scope = "user-read-private user-read-email";
 
