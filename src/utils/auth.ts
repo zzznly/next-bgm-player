@@ -1,27 +1,21 @@
-export const generateRandomString = (length: number) => {
-  let text = "";
-  const possible =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-};
-
 export const getToken = () => {
   return localStorage.getItem("access_token");
 };
 
-export const saveTokenParams = (params: URLSearchParams) => {
-  localStorage.setItem("access_token", params.get("access_token") ?? "");
-  localStorage.setItem("expires_in", params.get("expires_in") ?? "");
-  localStorage.setItem("token_type", params.get("token_type") ?? "");
+export const saveTokenParams = (params: any) => {
+  localStorage.setItem("access_token", params.access_token ?? "");
+  localStorage.setItem("refresh_token", params.refresh_token ?? "");
+  localStorage.setItem("expires_in", params.expires_in ?? "");
+  localStorage.setItem("token_type", params.token_type ?? "");
+  localStorage.setItem("scope", params.scope ?? "");
 };
 
 export const removeAuthToken = () => {
   localStorage.removeItem("access_token");
+  localStorage.removeItem("refresh_token");
   localStorage.removeItem("expires_in");
   localStorage.removeItem("token_type");
+  localStorage.removeItem("scope");
 };
 
 export const getSpotifyAuthUrl = () => {
