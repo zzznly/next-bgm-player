@@ -1,3 +1,5 @@
+import { getToken } from "@/utils/auth";
+
 interface HTTPInstance {
   get<T>(url: string, config?: RequestInit): Promise<T>;
   post<T>(url: string, data?: unknown, config?: RequestInit): Promise<T>;
@@ -26,7 +28,8 @@ export default class Service {
   constructor() {
     this.baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
     this.headers = {
-      // TODO: add headers
+      Authorization: `Bearer ${getToken()}`,
+      "Content-Type": "application/json",
     };
     this.http = {
       get: this.get.bind(this),
