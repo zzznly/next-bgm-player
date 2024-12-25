@@ -1,27 +1,19 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const redirect_uri = "http://localhost:3000";
-const stateKey = "spotify_auth_state";
+const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
   const state = searchParams.get("state");
 
-  const cookieStore = await cookies();
-  const storedState = cookieStore.get(stateKey)?.value;
-
-  // TODO:
-  if (state === null || state !== storedState) {
-    console.log(333, state, cookieStore);
-    return NextResponse.json({ error: "state_mismatch" }, { status: 400 });
+  if (state === null) {
+    return NextResponse.redirect(
+      new URL(`/?error=state_mismatch`, request.url)
+    );
   }
-
-  // Clear the state cookie
-  cookieStore.delete(stateKey);
 
   try {
     const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -46,8 +38,11 @@ export async function GET(request: Request) {
     const data = await response.json();
 
     return NextResponse.json({
+      token_type: data.token_type,
+      expires_in: data.expires_in,
       access_token: data.access_token,
       refresh_token: data.refresh_token,
+      scope: data.scope,
     });
   } catch (error) {
     return NextResponse.json(

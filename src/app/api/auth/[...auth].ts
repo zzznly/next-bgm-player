@@ -1,11 +1,9 @@
+import { getSpotifyAuthUrl } from "@/utils/auth";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID!;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET!;
-const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI!;
-
-const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
-const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+const REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI!;
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +12,7 @@ export default async function handler(
   const { method, query } = req;
 
   if (method === "GET" && query.auth === "login") {
-    const authUrl = `${AUTH_ENDPOINT}?response_type=code&client_id=${CLIENT_ID}&scope=user-read-private user-read-email&redirect_uri=${REDIRECT_URI}`;
+    const authUrl = getSpotifyAuthUrl();
     res.redirect(authUrl);
   }
 
@@ -22,7 +20,7 @@ export default async function handler(
     const { code } = query;
 
     try {
-      const response = await fetch(TOKEN_ENDPOINT, {
+      const response = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
