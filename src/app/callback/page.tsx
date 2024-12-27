@@ -28,7 +28,7 @@ export default function CallbackPage() {
         const data = await response.json();
         console.log("# data: ", data);
         saveTokenParams(data);
-        // router.push("/");
+        router.push("/");
       } catch (error) {
         console.error("# error: ", error);
         setError(error.message);
