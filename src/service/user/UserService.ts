@@ -1,6 +1,6 @@
 import Service from "../Service";
 
-export interface UserTopItemsReq {
+export interface UserTopItemsRequest {
   type: string;
   time_range?: string;
   limit?: number;
@@ -9,10 +9,10 @@ export interface UserTopItemsReq {
 
 class UserService extends Service {
   getUserInfo() {
-    return this.http.get("/me");
+    return this.http.get("/user/me");
   }
-  getUsersTopItems(params: UserTopItemsReq) {
-    return this.http.get(`/me/top/${params.type}`);
+  getUserTopItems(params: UserTopItemsRequest) {
+    return this.http.get(`/user/me/top/${params.type}`);
   }
 }
 
