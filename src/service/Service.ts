@@ -1,4 +1,4 @@
-import { getToken } from "@/utils/auth";
+import { cookies } from "next/headers"; // Server
 
 interface HTTPInstance {
   get<T>(url: string, config?: RequestInit): Promise<T>;
@@ -24,12 +24,14 @@ export default class Service {
   public http: HTTPInstance;
   private baseURL: string;
   private headers: Record<string, string>;
+  //   private cookie: Record<string, string> | undefined;
 
   constructor() {
     this.baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
     this.headers = {
-      Authorization: `Bearer ${getToken()}`,
-      "Content-Type": "application/json",
+      // TODO: Add Headers...
+      //   csrf: "token",
+      //   Referer: this.baseURL,
     };
     this.http = {
       get: this.get.bind(this),
@@ -45,12 +47,14 @@ export default class Service {
     data?: unknown,
     config?: RequestInit
   ): Promise<T> {
+    const accessToken = await cookies().get("access_token")?.value;
     try {
       const response = await fetch(this.baseURL + url, {
         method,
         headers: {
           ...this.headers,
           "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
           ...config?.headers,
         },
         body: data ? JSON.stringify(data) : undefined,
@@ -73,7 +77,6 @@ export default class Service {
   private get<T>(url: string, config?: RequestInit): Promise<T> {
     return this.request<T>("GET", url, undefined, config);
   }
-
   private post<T>(
     url: string,
     data?: unknown,
@@ -81,7 +84,6 @@ export default class Service {
   ): Promise<T> {
     return this.request<T>("POST", url, data, config);
   }
-
   private put<T>(
     url: string,
     data?: unknown,
@@ -89,7 +91,6 @@ export default class Service {
   ): Promise<T> {
     return this.request<T>("PUT", url, data, config);
   }
-
   private delete<T>(url: string, config?: RequestInit): Promise<T> {
     return this.request<T>("DELETE", url, undefined, config);
   }
