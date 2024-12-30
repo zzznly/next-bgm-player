@@ -1,21 +1,26 @@
-export const getToken = () => {
-  return localStorage.getItem("access_token");
+import { deleteCookie, setCookie } from "cookies-next";
+
+export const saveToken = (token: string) => {
+  setCookie("access_token", token);
+};
+export const removeToken = () => {
+  deleteCookie("access_token");
 };
 
 export const saveTokenParams = (params: any) => {
-  localStorage.setItem("access_token", params.access_token ?? "");
-  localStorage.setItem("refresh_token", params.refresh_token ?? "");
-  localStorage.setItem("expires_in", params.expires_in ?? "");
-  localStorage.setItem("token_type", params.token_type ?? "");
-  localStorage.setItem("scope", params.scope ?? "");
+  setCookie("access_token", params.access_token ?? "");
+  setCookie("refresh_token", params.refresh_token ?? "");
+  setCookie("expires_in", params.expires_in ?? "");
+  setCookie("token_type", params.token_type ?? "");
+  setCookie("scope", params.scope ?? "");
 };
 
-export const removeAuthToken = () => {
-  localStorage.removeItem("access_token");
-  localStorage.removeItem("refresh_token");
-  localStorage.removeItem("expires_in");
-  localStorage.removeItem("token_type");
-  localStorage.removeItem("scope");
+export const removeAuthTokenParams = () => {
+  deleteCookie("access_token");
+  deleteCookie("refresh_token");
+  deleteCookie("expires_in");
+  deleteCookie("token_type");
+  deleteCookie("scope");
 };
 
 export const getSpotifyAuthUrl = () => {
