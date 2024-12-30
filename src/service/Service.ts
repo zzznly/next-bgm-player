@@ -47,7 +47,9 @@ export default class Service {
     data?: unknown,
     config?: RequestInit
   ): Promise<T> {
-    const accessToken = await cookies().get("access_token")?.value;
+    const cookieStore = await cookies();
+    const accessToken = await cookieStore?.get("access_token")?.value;
+
     try {
       const response = await fetch(this.baseURL + url, {
         method,
