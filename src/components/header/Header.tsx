@@ -1,45 +1,51 @@
-import { getCookies } from "cookies-next";
-import { cookies } from "next/headers";
 import styles from "./styles.module.scss";
 import HeaderSearch from "./header-search/HeaderSearch";
 import HeaderUser from "./header-user/HeaderUser";
 import Link from "next/link";
-import { useUserInfo } from "@/service/user/useUserService";
-// import UserService from "@/service/user/UserService";
+import { queryOptions } from "@/service/user/queries";
+import { getDehydratedQuery } from "@/utils/react-query";
 
-// async function getUserInfo() {
-//   try {
-//     const res = await UserService.getUserInfo();
-//     console.log(12345, res);
-//     return res;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+export interface SpotifyUserInfo {
+  country: string;
+  display_name: string;
+  email: string;
+  explicit_content: {
+    filter_enabled: boolean;
+    filter_locked: boolean;
+  };
+  external_urls: {
+    spotify: string;
+  };
+  followers: {
+    href: string | null;
+    total: number;
+  };
+  href: string;
+  id: string;
+  images: Array<{
+    url: string;
+    height: number;
+    width: number;
+  }>;
+  product: string;
+  type: string;
+  uri: string;
+}
 
 export default async function Header() {
-  const cookie = await getCookies({ cookies });
-  console.log("### cookie: ", cookie);
-
-  const res = await fetch("https://api.spotify.com/v1/me", {
-    headers: {
-      Authorization: cookie?.access_token
-        ? `Bearer ${cookie?.access_token}`
-        : undefined,
-    },
+  const { queryKey, queryFn } = queryOptions.me();
+  const {
+    state: { data: userInfo },
+  } = await getDehydratedQuery({
+    queryKey,
+    queryFn,
   });
-  const data = await res.json();
-  console.log("## userInfo: ", data);
-
-  if (!res.ok) {
-    console.error("Failed to fetch user info:", res.status, res.statusText);
-  }
 
   return (
     <div className={styles["header"]}>
       <HeaderSearch />
-      {data?.display_name ? (
-        <HeaderUser {...{ data }} />
+      {userInfo?.display_name ? (
+        <HeaderUser {...{ userInfo }} />
       ) : (
         <Link href="/api/auth/login" className={styles["header-login"]}>
           Login with Spotify

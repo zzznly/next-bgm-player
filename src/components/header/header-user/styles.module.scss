@@ -1,26 +1,28 @@
 .header-user {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
-
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
 }
 
 .header-user-image {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background-color: #e6e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #e6e6e6;
 }
 
 .header-user-name {
-    color: #24242e;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: normal;
+  color: #24242e;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
 
-    @media (max-width: 767px) {
-        display: none;
-    }
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
