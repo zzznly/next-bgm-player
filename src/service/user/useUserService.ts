@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { queryOptions } from "@/service/user/queries";
 import { UserTopItemsRequest } from "./UserService";
 
