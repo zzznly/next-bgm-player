@@ -1,4 +1,5 @@
-import { cookies } from "next/headers"; // Server
+import { getCookies } from "cookies-next";
+import { cookies } from "next/headers";
 
 interface HTTPInstance {
   get<T>(url: string, config?: RequestInit): Promise<T>;
@@ -30,8 +31,6 @@ export default class Service {
     this.baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
     this.headers = {
       // TODO: Add Headers...
-      //   csrf: "token",
-      //   Referer: this.baseURL,
     };
     this.http = {
       get: this.get.bind(this),
@@ -47,8 +46,8 @@ export default class Service {
     data?: unknown,
     config?: RequestInit
   ): Promise<T> {
-    const cookieStore = await cookies();
-    const accessToken = await cookieStore?.get("access_token")?.value;
+    const cookie = await getCookies({ cookies });
+    console.log("### cookie: ", cookie);
 
     try {
       const response = await fetch(this.baseURL + url, {
@@ -56,7 +55,8 @@ export default class Service {
         headers: {
           ...this.headers,
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
+          Authorization:
+            cookie?.access_token && `Bearer ${cookie?.access_token}`,
           ...config?.headers,
         },
         body: data ? JSON.stringify(data) : undefined,
