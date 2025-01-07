@@ -1,6 +1,6 @@
 "use client";
 
-import { saveTokenParams } from "@/utils/auth";
+import { saveToken, saveTokenParams } from "@/utils/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -26,8 +26,7 @@ export default function CallbackPage() {
           `/api/auth/callback?code=${code}&state=${state}`
         );
         const data = await response.json();
-        console.log("# data: ", data);
-        saveTokenParams(data);
+        saveToken(data.access_token);
         router.push("/");
       } catch (error) {
         console.error("# error: ", error);

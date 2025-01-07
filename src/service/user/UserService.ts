@@ -9,10 +9,10 @@ export interface UserTopItemsRequest {
 
 class UserService extends Service {
   getUserInfo() {
-    return this.http.get("/user/me");
+    return this.http.get("/me");
   }
   getUserTopItems(params: UserTopItemsRequest) {
-    return this.http.get(`/user/me/top/${params.type}`);
+    return this.http.get(`/me/top/${params.type}`);
   }
 }
 

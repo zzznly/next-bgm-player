@@ -25,7 +25,6 @@ export default class Service {
   public http: HTTPInstance;
   private baseURL: string;
   private headers: Record<string, string>;
-  //   private cookie: Record<string, string> | undefined;
 
   constructor() {
     this.baseURL = process.env.SPOTIFY_BASE_URL!;
