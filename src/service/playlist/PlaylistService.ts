@@ -1,12 +1,12 @@
 import Service from "../Service";
 
 class PlaylistService extends Service {
-  getPlaylistDetail(params: PlaylistRequest) {
-    return this.http.get(`/playlists/${params.playlist_id}`);
-  }
+  // getPlaylistDetail(params: PlaylistRequest) {
+  //   return this.http.get(`/playlists/${params.playlist_id}`);
+  // }
 
   getNewReleaseAlbums() {
-    return this.http.get<NewReleaseAlbumsResponse>("/playlists/new-release");
+    return this.http.get<NewReleaseAlbumsResponse>("/browse/new-releases");
   }
 }
 

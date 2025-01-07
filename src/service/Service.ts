@@ -28,7 +28,7 @@ export default class Service {
   //   private cookie: Record<string, string> | undefined;
 
   constructor() {
-    this.baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
+    this.baseURL = process.env.SPOTIFY_BASE_URL!;
     this.headers = {
       // TODO: Add Headers...
     };
