@@ -1,0 +1,45 @@
+.section {
+  position: relative;
+  margin-top: 32px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.section-wrap {
+  padding: 0 42px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.list {
+  padding: 24px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.list-head {
+  h2.list-title {
+    color: var(--mono-800);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+  }
+
+  .list-link-more {
+    position: absolute;
+    top: 24px;
+    right: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    color: var(--primary);
+  }
+}
+
+.list-content {
+  display: flex;
+  gap: 24px;
+}
