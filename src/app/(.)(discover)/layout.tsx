@@ -13,8 +13,10 @@ export default function MainLayout({
       <Sidebar />
       <div className={styles["content"]}>
         <Header />
-        <div className={styles["page"]}>{children}</div>
-        <PlayerPanel />
+        <div className={styles["body"]}>
+          <div className={styles["page"]}>{children}</div>
+          <PlayerPanel />
+        </div>
       </div>
     </div>
   );
