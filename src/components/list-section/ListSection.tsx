@@ -26,7 +26,7 @@ export default function ListSection({
             )}
           </div>
           <div className={styles["list-content"]}>
-            {items.map(({ images, name, uri, id, description }) => (
+            {items?.map(({ images, name, uri, id, description }) => (
               <ListItem key={id} {...{ id, name, images, uri, description }} />
             ))}
           </div>

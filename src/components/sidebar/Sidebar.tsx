@@ -20,12 +20,12 @@ export default function Sidebar() {
         icon: { name: "discover", category: "navbar" },
         iconActive: { name: "discover-active", category: "navbar" },
       },
-      {
-        label: "Explorer",
-        path: "/explorer",
-        icon: { name: "explorer", category: "navbar" },
-        iconActive: { name: "explorer-active", category: "navbar" },
-      },
+      // {
+      //   label: "Explorer",
+      //   path: "/explorer",
+      //   icon: { name: "explorer", category: "navbar" },
+      //   iconActive: { name: "explorer-active", category: "navbar" },
+      // },
       {
         label: "Search",
         path: "/search",
