@@ -1,0 +1,89 @@
+.detail-page {
+  &-head {
+    display: flex;
+    align-items: center;
+    padding: 0 42px;
+    min-height: 30vh;
+  }
+  &-body {
+    margin: 24px 0 0;
+    padding: 0 42px;
+  }
+}
+
+.detail-page-info {
+  margin-left: 24px;
+}
+
+.detail-page-type {
+  font-size: 14px;
+}
+
+.detail-page-title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.detail-page-owner {
+  margin-top: 8px;
+  color: var(--mono-800);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.detail-page-description {
+  color: var(--mono-800);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+button.track-item {
+  display: grid;
+  grid-template-columns:
+    40px minmax(40px, 1fr) minmax(160px, 4fr) minmax(80px, 2fr)
+    minmax(40px, 1fr);
+  align-items: center;
+  height: 60px;
+  padding: 0 24px;
+  border-radius: 12px;
+  background: #fff;
+  text-align: left;
+}
+.track-no {
+  color: var(--mono-800);
+  font-size: 14px;
+}
+.track-image {
+  border-radius: 4px;
+}
+.track-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .track-name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .track-artists {
+    color: var(--mono-800);
+    font-size: 12px;
+  }
+}
+
+.track-album {
+  font-size: 14px;
+}
+.track-runningtime {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--mono-800);
+  font-size: 14px;
+}
