@@ -9,6 +9,7 @@ export interface ListItemProps {
   description?: string;
   uri?: string;
   images: { url: string; width: number; height: number }[];
+  type?: string;
 }
 export default function ListItem({
   id,
@@ -16,13 +17,11 @@ export default function ListItem({
   name,
   uri,
   description,
+  type,
 }: ListItemProps) {
   return (
     <li className={styles["list-item"]}>
-      <Link
-        className={styles["list-item-link"]}
-        href={`/detail/playlist?id=${id}`}
-      >
+      <Link className={styles["list-item-link"]} href={`/${type}/${id}`}>
         <div className={styles["list-item-album"]}>
           <img
             src={images?.[0]?.url}

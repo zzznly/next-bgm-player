@@ -40,18 +40,18 @@ export default function Sidebar() {
         icon: { name: "playlist", category: "navbar" },
         iconActive: { name: "playlist-active", category: "navbar" },
       },
-      {
-        label: "Albums",
-        path: "/my/favorites",
-        icon: { name: "albums", category: "navbar" },
-        iconActive: { name: "albums-active", category: "navbar" },
-      },
-      {
-        label: "Artists",
-        path: "/my/artists",
-        icon: { name: "artists", category: "navbar" },
-        iconActive: { name: "artists-active", category: "navbar" },
-      },
+      // {
+      //   label: "Albums",
+      //   path: "/my/favorites",
+      //   icon: { name: "albums", category: "navbar" },
+      //   iconActive: { name: "albums-active", category: "navbar" },
+      // },
+      // {
+      //   label: "Artists",
+      //   path: "/my/artists",
+      //   icon: { name: "artists", category: "navbar" },
+      //   iconActive: { name: "artists-active", category: "navbar" },
+      // },
     ],
     others: [
       {

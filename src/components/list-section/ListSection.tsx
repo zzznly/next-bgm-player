@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import ListItem from "../list-item/ListItem";
+import ListItem from "./list-item/ListItem";
 
 export interface ListSectionProps {
   title: string;
@@ -26,8 +26,11 @@ export default function ListSection({
             )}
           </div>
           <div className={styles["list-content"]}>
-            {items?.map(({ images, name, uri, id, description }) => (
-              <ListItem key={id} {...{ id, name, images, uri, description }} />
+            {items?.map(({ images, name, uri, id, description, type }) => (
+              <ListItem
+                key={id}
+                {...{ id, name, images, uri, description, type }}
+              />
             ))}
           </div>
         </div>
