@@ -5,20 +5,8 @@ interface HTTPInstance {
   get<T>(url: string, config?: RequestInit): Promise<T>;
   post<T>(url: string, data?: unknown, config?: RequestInit): Promise<T>;
   put<T>(url: string, data?: unknown, config?: RequestInit): Promise<T>;
+  patch<T>(url: string, data?: unknown, config?: RequestInit): Promise<T>;
   delete<T>(url: string, config?: RequestInit): Promise<T>;
-  // patch<T>(
-  //     url: string,
-  //     data?: unknown,
-  //     config?: RequestInit,
-  // ): Promise<T>;
-  // head<T>(
-  //     url: string,
-  //     config?: RequestInit,
-  // ): Promise<T>;
-  // options<T>(
-  //     url: string,
-  //     config?: RequestInit,
-  // ): Promise<T>;
 }
 
 export default class Service {
@@ -35,6 +23,7 @@ export default class Service {
       get: this.get.bind(this),
       post: this.post.bind(this),
       put: this.put.bind(this),
+      patch: this.patch.bind(this),
       delete: this.delete.bind(this),
     };
   }
@@ -91,6 +80,13 @@ export default class Service {
     config?: RequestInit
   ): Promise<T> {
     return this.request<T>("PUT", url, data, config);
+  }
+  private patch<T>(
+    url: string,
+    data?: unknown,
+    config?: RequestInit
+  ): Promise<T> {
+    return this.request<T>("PATCH", url, data, config);
   }
   private delete<T>(url: string, config?: RequestInit): Promise<T> {
     return this.request<T>("DELETE", url, undefined, config);
