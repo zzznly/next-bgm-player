@@ -4,26 +4,21 @@ import HeaderUser from "./header-user/HeaderUser";
 import Link from "next/link";
 import { queryOptions } from "@/service/user/queries";
 import { getDehydratedQuery, Hydrate } from "@/utils/react-query";
+import UserService from "@/service/user/UserService";
 
 export default async function Header() {
-  const { queryKey, queryFn } = queryOptions.me();
-  const query = await getDehydratedQuery({
-    queryKey,
-    queryFn,
-  });
+  const userInfo = await UserService.getUserInfo();
 
   return (
     <div className={styles["header"]}>
-      <Hydrate state={{ queries: [query] }}>
-        <HeaderSearch />
-        {query?.state?.data?.display_name ? (
-          <HeaderUser userInfo={query?.state?.data} />
-        ) : (
-          <Link href="/api/auth/login" className={styles["header-login"]}>
-            Login with Spotify
-          </Link>
-        )}
-      </Hydrate>
+      <HeaderSearch />
+      {userInfo?.display_name ? (
+        <HeaderUser userInfo={userInfo} />
+      ) : (
+        <Link href="/api/auth/login" className={styles["header-login"]}>
+          Login with Spotify
+        </Link>
+      )}
     </div>
   );
 }
