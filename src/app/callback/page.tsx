@@ -1,6 +1,6 @@
 "use client";
 
-import { saveToken, saveTokenParams } from "@/utils/auth";
+import { saveTokenParams } from "@/utils/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -21,12 +21,11 @@ export default function CallbackPage() {
           setLoading(false);
           return;
         }
-
         const response = await fetch(
-          `/api/auth/callback?code=${code}&state=${state}`
+          `/api/auth/token?code=${code}&state=${state}`
         );
         const data = await response.json();
-        saveToken(data.access_token);
+        saveTokenParams(data);
         router.push("/");
       } catch (error) {
         console.error("# error: ", error);
@@ -36,12 +35,10 @@ export default function CallbackPage() {
         setLoading(false);
       }
     };
-
     fetchToken(code, state);
   }, [searchParams]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
-
   return <div>Authenticated successfully!</div>;
 }

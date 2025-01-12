@@ -36,14 +36,7 @@ export async function GET(request: Request) {
     }
 
     const data = await response.json();
-
-    return NextResponse.json({
-      token_type: data.token_type,
-      expires_in: data.expires_in,
-      access_token: data.access_token,
-      refresh_token: data.refresh_token,
-      scope: data.scope,
-    });
+    return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch tokens" },
