@@ -55,7 +55,7 @@ export default async function DetailPage({
                   </div>
                   <div className={styles["track-artists"]}>
                     {(item?.track?.artists || item?.artists)
-                      ?.map((v) => v.name)
+                      ?.map((v: PlaylistDetailItemTrack) => v.name)
                       .join(", ")}
                   </div>
                 </div>

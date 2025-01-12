@@ -1,5 +1,15 @@
+@mixin ellipsis($lines, $width: inherit) {
+  width: $width;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}
+
 .detail-page {
   &-head {
+    width: 100%;
     display: flex;
     align-items: center;
     padding: 0 42px;
@@ -12,7 +22,9 @@
 }
 
 .detail-page-info {
+  width: 100%;
   margin-left: 24px;
+  overflow-x: hidden;
 }
 
 .detail-page-type {
@@ -20,13 +32,15 @@
 }
 
 .detail-page-title {
-  font-size: 48px;
+  width: 100%;
+  font-size: 40px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.2;
+  @include ellipsis(2);
 }
 
 .detail-page-owner {
-  margin-top: 8px;
+  margin-top: 12px;
   color: var(--mono-800);
   font-size: 14px;
   font-weight: 500;
@@ -46,10 +60,9 @@
 
 button.track-item {
   display: grid;
-  grid-template-columns:
-    40px minmax(40px, 1fr) minmax(160px, 4fr) minmax(80px, 2fr)
-    minmax(40px, 1fr);
+  grid-template-columns: 20px 60px minmax(160px, 4fr) minmax(80px, 2fr) 40px;
   align-items: center;
+  gap: 12px;
   height: 60px;
   padding: 0 24px;
   border-radius: 12px;
@@ -71,15 +84,17 @@ button.track-item {
   .track-name {
     font-size: 14px;
     font-weight: 600;
+    @include ellipsis(1);
   }
   .track-artists {
     color: var(--mono-800);
     font-size: 12px;
+    @include ellipsis(1);
   }
 }
-
 .track-album {
   font-size: 14px;
+  @include ellipsis(1);
 }
 .track-runningtime {
   display: flex;
