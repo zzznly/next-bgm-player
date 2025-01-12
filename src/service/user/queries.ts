@@ -10,8 +10,8 @@ export const queryOptions = {
     queryKey: queryKeys.me,
     queryFn: () => UserService.getUserInfo(),
   }),
-  top: (type: string) => ({
-    queryKey: queryKeys.top(type),
-    queryFn: () => UserService.getUserTopItems({ type }),
-  }),
+  // topItems: (type: "artists" | "tracks") => ({
+  //   queryKey: queryKeys.top(type),
+  //   queryFn: () => UserService.getUserTopItems(type),
+  // }),
 };

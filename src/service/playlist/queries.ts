@@ -11,9 +11,9 @@ export const queryOptions = {
     queryKey: queryKeys.newReleases,
     queryFn: () => PlaylistService.getNewReleaseAlbums(),
   }),
-  getCurrentPlaylist: () => ({
+  getCurrentPlaylists: () => ({
     queryKey: queryKeys.getCurrentPlaylist,
-    queryFn: () => PlaylistService.getCurrentPlaylist(),
+    queryFn: () => PlaylistService.getCurrentPlaylists(),
   }),
   // detail: (params: PlaylistRequest) => ({
   //   queryKey: queryKeys.detail,
