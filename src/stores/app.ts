@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { StateCreator } from "zustand";
 
 export type AppState = {
   isLoading: boolean;
@@ -6,8 +6,14 @@ export type AppState = {
 export type AppActions = {
   setIsLoading: (isLoading: boolean) => void;
 };
+export type AppSlice = AppState & AppActions;
 
-export const useAppStore = create<AppState & AppActions>((set) => ({
+export const createAppSlice: StateCreator<
+  AppSlice,
+  [],
+  [],
+  AppActions
+> = (set) => ({
   isLoading: true,
   setIsLoading: (isLoading) => set({ isLoading: isLoading }),
-}));
+})

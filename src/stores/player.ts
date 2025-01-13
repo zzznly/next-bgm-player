@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { StateCreator } from "zustand";
 
 export type PlayerState = {
   playingUrl: string;
@@ -18,9 +18,15 @@ export type PlayerActions = {
   setCurrentPosition: (currentPosition: number) => void;
   setDurationMs: (durationMs: number) => void;
 };
+export type PlayerSlice = PlayerState & PlayerActions;
 
-export const usePlayerStore = create<PlayerState & PlayerActions>((set) => ({
-  playingUrl: "", // ex. spotify:track:2pIUpMhHL6L9Z5lnKxJJr9
+export const createPlayerSlice: StateCreator<
+  PlayerSlice,
+  [],
+  [],
+  PlayerActions
+> = (set) => ({
+  playingUrl: "",
   playingCategory: "",
   deviceId: "",
   currentTrack: null,
@@ -35,4 +41,4 @@ export const usePlayerStore = create<PlayerState & PlayerActions>((set) => ({
   setCurrentPosition: (currentPosition: number) =>
     set({ currentPosition: currentPosition }),
   setDurationMs: (durationMs: number) => set({ durationMs: durationMs }),
-}));
+});
