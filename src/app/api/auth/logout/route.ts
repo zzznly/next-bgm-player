@@ -11,14 +11,14 @@ export async function GET(request: Request) {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch refresh token: ${response.status}`);
+      throw new Error(`Failed to logout: ${response.status}`);
     }
 
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to fetch tokens" },
+      { error: "Failed to logout" },
       { status: 500 }
     );
   }

@@ -24,7 +24,8 @@ async function SearchMain() {
       <ListSection
         title="New Release"
         items={(data as NewReleaseAlbumsResponse)?.albums?.items
-          ?.slice(0, 10)
+          ?.sort(() => Math.random() - 0.5)
+          .slice(0, 10)
           .map(({ name, images, uri, type, artists }: NewReleaseAlbumItem) => ({
             uri,
             type,
