@@ -9,19 +9,20 @@ export default function SidebarMenu({
   icon,
   label,
   iconActive,
+  onClick,
 }: SidebarMenuItem) {
   const pathname = usePathname();
 
   return (
     <div
       className={`${styles["sidebar-menu-item"]} ${
-        pathname.split("/")[1] === path.split("/")[1] ? styles["active"] : ""
+        pathname?.split("/")[1] === path?.split("/")[1] ? styles["active"] : ""
       }`}
     >
-      <Link href={path}>
+      <Link href={path ?? ""} onClick={onClick}>
         <SvgIcon
           name={
-            pathname.split("/")[1] === path.split("/")[1]
+            pathname?.split("/")[1] === path?.split("/")[1]
               ? iconActive?.name
               : icon?.name
           }

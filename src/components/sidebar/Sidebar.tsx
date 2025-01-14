@@ -3,12 +3,15 @@
 import styles from "./styles.module.scss";
 import TrueTonesLogo from "@/svg/TrueTonesLogo";
 import SidebarMenu from "./sidebar-menu/SidebarMenu";
+import { removeAuthTokenParams } from "@/utils/auth";
+import { useRouter } from "next/navigation";
 
 export interface SidebarMenuItem {
   label: string;
-  path: string;
+  path?: string;
   icon: { name: string; category?: string };
   iconActive?: { name: string; category?: string };
+  onClick?: () => void;
 }
 
 export default function Sidebar() {
@@ -56,10 +59,17 @@ export default function Sidebar() {
     others: [
       {
         label: "Logout",
-        path: "/logout",
         icon: { name: "logout", category: "navbar" },
+        onClick: () => handleLogout(),
       },
     ],
+  };
+
+  const router = useRouter();
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout");
+    removeAuthTokenParams();
+    router.push("/");
   };
 
   return (
