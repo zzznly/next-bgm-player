@@ -88,17 +88,17 @@
 }
 
 .search-main-section.current-playlists {
-  width: 45%;
+  width: fit-content;
 
   .list-content {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
 }
 
 .search-main-section.categories {
-  width: 55%;
+  min-width: 50%;
 
   button.category {
     padding: 12px;
