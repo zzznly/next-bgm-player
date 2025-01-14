@@ -1,4 +1,3 @@
-import { removeAuthTokenParams } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -14,8 +13,6 @@ export async function GET(request: Request) {
     if (!response.ok) {
       throw new Error(`Failed to fetch refresh token: ${response.status}`);
     }
-
-    removeAuthTokenParams();
 
     const data = await response.json();
     return NextResponse.json(data);

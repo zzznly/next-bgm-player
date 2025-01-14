@@ -1,18 +1,17 @@
+import { setCookie } from "cookies-next";
 import { NextResponse } from "next/server";
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
   const code = searchParams.get("code");
   const state = searchParams.get("state");
 
   if (state === null) {
-    return NextResponse.redirect(
-      new URL(`/?error=state_mismatch`, request.url)
-    );
+    return NextResponse.redirect(new URL(`/?error=state_mismatch`, req.url));
   }
 
   try {
@@ -36,7 +35,11 @@ export async function GET(request: Request) {
     }
 
     const data = await response.json();
-    return NextResponse.json(data);
+    return new Response(JSON.stringify(data), {
+      headers: {
+        "Set-Cookie": `refresh_token=${data.refresh_token}; Path=/; Max-Age=2592000; HttpOnly; Secure; SameSite=Lax`,
+      },
+    });
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch tokens" },

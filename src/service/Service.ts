@@ -1,9 +1,5 @@
-import {
-  deleteCookie,
-  getCookies,
-  setCookie,
-  TmpCookiesObj,
-} from "cookies-next";
+import { removeAccessToken, saveAccessToken } from "@/utils/auth";
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { cookies } from "next/headers";
 
 interface HTTPInstance {
@@ -18,7 +14,7 @@ export default class Service {
   public http: HTTPInstance;
   private baseURL: string;
   private headers: Record<string, string>;
-  private cookie: TmpCookiesObj | undefined;
+  private cookies: ReadonlyRequestCookies | undefined;
   private tokenGenerateTime: number;
 
   constructor() {
@@ -43,41 +39,40 @@ export default class Service {
     data?: unknown,
     config?: RequestInit
   ): Promise<T> {
-    this.cookie = await getCookies({ cookies });
-    console.log("### cookie: ", this.cookie);
+    this.cookies = await cookies();
+    console.log("### cookies: ", this.cookies);
 
     try {
+      // 토큰 만료시 refresh
+      const currentTime = new Date().getTime();
+      const timeDifference = currentTime - this.tokenGenerateTime;
+      const expiresIn = this.cookies.get("expires_in")?.value;
+
+      if (timeDifference >= Number(expiresIn)) {
+        console.log("!!! Token Expired !!! :", timeDifference);
+        this.tokenGenerateTime = currentTime;
+        await this.tokenRefresh();
+      }
+
+      const accessToken = this.cookies.get("access_token")?.value;
       const response = await fetch(this.baseURL + url, {
         method,
         headers: {
           ...this.headers,
           "Content-Type": "application/json",
-          Authorization:
-            this.cookie?.access_token && `Bearer ${this.cookie?.access_token}`,
+          Authorization: accessToken && `Bearer ${accessToken}`,
           ...config?.headers,
         },
         body: data ? JSON.stringify(data) : undefined,
         credentials: "include",
         ...config,
       });
-      const responseData: T = await response.json();
-      console.log(123, responseData);
-
-      // 토큰 만료시 refresh
-      const currentTime = new Date().getTime();
-      const timeDifference = currentTime - this.tokenGenerateTime;
-
-      if (timeDifference >= 3 * 1000) {
-        this.tokenGenerateTime = currentTime;
-        const data = await this.tokenRefresh();
-        // setCookie("accessToken", data.access_token);
-        console.log("### refresh: ", data);
-        console.log("Time diff (ms):", timeDifference, data.access_token);
-      }
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+
+      const responseData: T = await response.json();
       return responseData;
     } catch (error) {
       console.error("Error:", error);
@@ -115,15 +110,21 @@ export default class Service {
 
   private async tokenRefresh() {
     try {
-      const response = await fetch(
-        this.baseURL +
-          `/auth/refresh?refresh_token=${this.cookie?.refresh_token}`
-      );
-      if (!response.ok) {
-        throw new Error(`Refresh token failed: ${response.status}`);
+      const refreshToken = this.cookies?.get("refresh_token")?.value;
+      const response = await fetch(this.baseURL + `/auth/refresh`, {
+        method: "POST",
+        body: JSON.stringify({
+          refresh_token: refreshToken,
+        }),
+      });
+
+      if (!response?.ok) {
+        throw new Error(`Refresh token failed: ${response?.status}`);
       }
-      const responseData = await response.json();
-      return responseData;
+      const data = await response?.json();
+      console.log("## new access_token: ", data.access_token);
+      removeAccessToken();
+      saveAccessToken(data.access_token);
     } catch (error) {
       console.error("Refresh token error:", error);
       throw error;
