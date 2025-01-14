@@ -1,16 +1,8 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { ListItemProps } from "../ListSection";
 
-export interface ListItemProps {
-  id?: string;
-  name?: string;
-  title?: string;
-  description?: string;
-  uri?: string;
-  images: { url: string; width: number; height: number }[];
-  type?: string;
-}
 export default function ListItem({
   id,
   images,
@@ -23,10 +15,12 @@ export default function ListItem({
     <li className={styles["list-item"]}>
       <Link className={styles["list-item-link"]} href={`/${type}/${id}`}>
         <div className={styles["list-item-album"]}>
-          <img
+          <Image
             src={images?.[0]?.url}
-            className={styles["list-item-album-image"]}
+            width={images?.[0]?.width || 50}
+            height={images?.[0]?.height || 50}
             alt="album"
+            className={styles["list-item-album-image"]}
           />
         </div>
         {name && <div className={styles["list-item-title"]}>{name}</div>}

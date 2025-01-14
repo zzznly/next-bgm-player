@@ -1,8 +1,11 @@
 .section {
+  // width: 100%;
   position: relative;
-  margin-top: 32px;
-  width: 100%;
   overflow: hidden;
+
+  * + & {
+    margin-top: 32px;
+  }
 }
 
 .section-wrap {
@@ -11,6 +14,7 @@
   flex-wrap: nowrap;
   overflow-x: auto;
 }
+
 .list {
   padding: 24px 36px;
   display: flex;

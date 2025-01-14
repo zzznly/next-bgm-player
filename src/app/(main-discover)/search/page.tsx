@@ -5,6 +5,8 @@ import CategoryService from "@/service/category/CategoryService";
 import PlaylistService from "@/service/playlist/PlaylistService";
 import ListItem from "@/components/list-section/list-item/ListItem";
 
+const cx = classNames.bind(styles);
+
 export default function SearchPage() {
   return (
     <div className={styles["search-page"]}>
@@ -43,7 +45,6 @@ async function SearchMain() {
 }
 
 async function CurrentPlaylistsSection() {
-  const cx = classNames.bind(styles);
   const data = await PlaylistService.getCurrentPlaylists();
 
   return (
@@ -54,6 +55,7 @@ async function CurrentPlaylistsSection() {
             <h2 className={styles["list-title"]}>Current Playlists</h2>
             <div className={styles["list-content"]}>
               {data?.items
+                ?.reverse()
                 ?.sort(() => Math.random() - 0.5)
                 .slice(0, 4)
                 .map(
@@ -77,7 +79,6 @@ async function CurrentPlaylistsSection() {
 }
 
 async function CategoriesSection() {
-  const cx = classNames.bind(styles);
   const data = await CategoryService.getCategories();
 
   const CATEGORY_BG_COLORS = [

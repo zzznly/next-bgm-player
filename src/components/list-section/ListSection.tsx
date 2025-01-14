@@ -3,9 +3,19 @@ import styles from "./styles.module.scss";
 import ListItem from "./list-item/ListItem";
 
 export interface ListSectionProps {
-  title: string;
-  items: PlaylistItem[];
+  title?: string;
+  items: PlaylistItem[] | any[];
   hasShowMore?: boolean;
+}
+
+export interface ListItemProps {
+  id?: string;
+  name?: string;
+  title?: string;
+  description?: string;
+  uri?: string;
+  images: { url: string; width: number; height: number }[];
+  type?: string;
 }
 
 export default function ListSection({
@@ -26,11 +36,8 @@ export default function ListSection({
             )}
           </div>
           <div className={styles["list-content"]}>
-            {items?.map(({ images, name, uri, id, description, type }) => (
-              <ListItem
-                key={id}
-                {...{ id, name, images, uri, description, type }}
-              />
+            {items?.map((item: ListItemProps) => (
+              <ListItem key={item.id} {...item} />
             ))}
           </div>
         </div>

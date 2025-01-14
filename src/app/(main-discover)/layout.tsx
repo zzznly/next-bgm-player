@@ -2,6 +2,9 @@ import styles from "./styles.module.scss";
 import Header from "@/components/header/Header";
 import PlayerPanel from "@/components/player-panel/PlayerPanel";
 import Sidebar from "@/components/sidebar/Sidebar";
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
 
 export default function MainLayout({
   children,
@@ -9,7 +12,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`${styles["layout"]} ${styles["layout-row"]}`}>
+    <div className={cx("layout", "layout-row")}>
       <Sidebar />
       <div className={styles["content"]}>
         <Header />
