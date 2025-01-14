@@ -2,27 +2,19 @@
 
 import { useState } from "react";
 import styles from "./styles.module.scss";
-
-import {
-  useMutationPlayerPause,
-  useMutationPlayerStart,
-  useMutationSeekPosition,
-  useMutationSetRepeat,
-  useMutationSkipNext,
-  useMutationSkipPrev,
-  useMutationToggleShuffle,
-} from "@service/Player/usePlayer";
-import usePlaying from "@store/playing/usePlaying";
-import useSDK from "@store/sdk/useSDK";
-import { convertDurationTime } from "@utils/convert";
-import usePlayerController from "@hooks/usePlayerController";
-import svgIcon from "@/components/svgIcon/SvgIcon";
 import SvgIcon from "@/components/svgIcon/SvgIcon";
+import useSpotifyPlayer from "@/hooks/useSpotifyPlayer";
+import { useCurrentTrack } from "@/service/player/usePlayerService";
 
 const SKIP_PREV_THRESHOLD = 3000;
 const REPEAT_STATES = ["off", "context", "track"];
 
 export default function Player() {
+  useSpotifyPlayer();
+
+  // const { data } = useCurrentTrack();
+  // console.log(1111, data);
+
   return (
     <div className={styles["player"]}>
       <h2 className={styles["player-header"]}>NOW PLAYING</h2>
