@@ -11,9 +11,9 @@ class UserService extends Service {
   getUserInfo() {
     return this.http.get("/me");
   }
-  // getUserTopItems(params: "artists" | "tracks") {
-  //   return this.http.get(`/me/top/${params}`);
-  // }
+  getUserTopItems(params: "artists" | "tracks") {
+    return this.http.get(`/me/top/${params}`);
+  }
 }
 
 export default new UserService();
