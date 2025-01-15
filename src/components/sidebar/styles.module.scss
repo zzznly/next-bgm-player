@@ -1,7 +1,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   width: 260px;
   background-color: var(--mono-000);
 
@@ -31,7 +31,10 @@
 }
 
 .sidebar-menu-list {
-  margin-top: 12px;
+  //   margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .sidebar-menu-link {

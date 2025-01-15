@@ -41,14 +41,14 @@ function SidebarMenu() {
         iconActive: { name: "search-active" },
       },
     ],
-    library: [
-      {
-        label: "My Music",
-        path: "/my/playlists",
-        icon: { name: "playlist", category: "navbar" },
-        iconActive: { name: "playlist-active", category: "navbar" },
-      },
-    ],
+    // library: [
+    //   {
+    //     label: "My Music",
+    //     path: "/my/playlists",
+    //     icon: { name: "playlist", category: "navbar" },
+    //     iconActive: { name: "playlist-active", category: "navbar" },
+    //   },
+    // ],
     others: [
       {
         label: "Logout",
@@ -69,7 +69,7 @@ function SidebarMenu() {
     <div className={styles["sidebar-menu"]}>
       {Object.keys(sidebarMenuList).map((menu: string, idx: number) => (
         <div className={styles["sidebar-menu-wrap"]} key={idx}>
-          <p className={styles["sidebar-menu-title"]}>{menu.toUpperCase()}</p>
+          {/* <p className={styles["sidebar-menu-title"]}>{menu.toUpperCase()}</p> */}
           <ul className={styles["sidebar-menu-list"]}>
             {sidebarMenuList[menu as keyof typeof sidebarMenuList].map(
               (item: SidebarMenuItemProps, idx: number) => (
