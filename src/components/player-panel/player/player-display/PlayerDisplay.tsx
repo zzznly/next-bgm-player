@@ -3,8 +3,8 @@
 import Image from "next/image";
 import styles from "./styles.module.scss";
 
-export default async function PlayerDisplay() {
-  // const { data: currentTrackData } = await useCurrentTrack();
+export default function PlayerDisplay() {
+  // const { data: currentTrackData } = useCurrentTrack();
 
   return (
     <div className={styles["player-display"]}>

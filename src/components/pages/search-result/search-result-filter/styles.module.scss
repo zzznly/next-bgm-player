@@ -1,0 +1,16 @@
+.search-result-filter {
+  padding: 0 42px;
+}
+.search-result-filter-link {
+  padding: 6px 14px;
+  border-radius: 32px;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: #fff;
+  color: var(--font-main);
+
+  &.active {
+    background-color: var(--primary-010);
+    color: #fff;
+  }
+}
