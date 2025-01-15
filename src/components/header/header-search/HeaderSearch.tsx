@@ -1,33 +1,43 @@
 "use client";
+
 import styles from "./styles.module.scss";
 import SvgIcon from "@/components/svgIcon/SvgIcon";
-import { useState } from "react";
+import { useDebounce } from "@/hooks/useDebounce";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function HeaderSearch() {
+  const router = useRouter();
+  const params = useParams();
+  const pathname = usePathname();
+
   const [keyword, setKeyword] = useState("");
+  const debouncedKeyword = useDebounce(keyword, 500);
 
-  // const location = useLocation();
-  // const navigate = useNavigate();
-  // const params = useParams();
-  // const debouncedKeyword = useDebounce(keyword, 500);
+  useEffect(() => {
+    if (!params?.keyword) return;
+    setKeyword(params?.keyword);
+  }, [params.keyword]);
 
-  // useEffect(() => {
-  //     if (!params?.keyword) return;
-  //     setKeyword(params?.keyword);
-  // }, [params.keyword]);
+  useEffect(() => {
+    if (pathname.includes("search"))
+      router.replace(
+        !debouncedKeyword ? "/search" : `/search/${debouncedKeyword}`
+      );
+  }, [debouncedKeyword]);
 
-  // useEffect(() => {
-  //     if (location.pathname.includes("search"))
-  //         navigate(!debouncedKeyword ? "/search" : `/search/${debouncedKeyword}`, {
-  //             replace: true,
-  //         });
-  // }, [debouncedKeyword]);
+  useEffect(() => {
+    if (!pathname.includes("search")) {
+      setKeyword("");
+    }
+  }, [pathname]);
 
-  // useEffect(() => {
-  // if (!window.location.pathname.includes("search")) {
-  //     setKeyword("");
-  // }
-  // }, []);
+  const onFocus = () => {
+    if (!pathname.includes("search")) router.replace("/search");
+  };
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  };
 
   return (
     <div className={styles["header-search"]}>
@@ -36,9 +46,8 @@ export default function HeaderSearch() {
         type="search"
         placeholder="Search..."
         value={keyword}
-        onChange={(e) => {
-          setKeyword(e.target.value);
-        }}
+        onChange={onChange}
+        onFocus={onFocus}
       />
       <button className={styles["header-button"]}>
         <SvgIcon name="search" />
