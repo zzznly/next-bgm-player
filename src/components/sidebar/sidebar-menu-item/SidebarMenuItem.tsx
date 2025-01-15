@@ -1,23 +1,25 @@
+import classNames from "classnames/bind";
 import styles from "./styles.module.scss";
-import { SidebarMenuItem } from "../Sidebar";
+import { SidebarMenuItemProps } from "../Sidebar";
 import SvgIcon from "@/components/svgIcon/SvgIcon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function SidebarMenu({
+export default function SidebarMenuItem({
   path,
   icon,
   label,
   iconActive,
   onClick,
-}: SidebarMenuItem) {
+}: SidebarMenuItemProps) {
   const pathname = usePathname();
+  const cx = classNames.bind(styles);
 
   return (
     <div
-      className={`${styles["sidebar-menu-item"]} ${
-        pathname?.split("/")[1] === path?.split("/")[1] ? styles["active"] : ""
-      }`}
+      className={cx("sidebar-menu-item", {
+        active: pathname?.split("/")[1] === path?.split("/")[1],
+      })}
     >
       <Link href={path ?? ""} onClick={onClick}>
         <SvgIcon
