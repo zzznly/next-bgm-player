@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { mutationOptions, queryOptions } from "@/service/player/queries";
+import { queryOptions } from "@/service/player/queries";
+import { mutationOptions } from "@/service/player/mutations";
 
 export function usePlaybackState() {
   return useQuery(queryOptions.getPlaybackState());
