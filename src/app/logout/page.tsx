@@ -1,6 +1,6 @@
 "use client";
 
-import { removeToken } from "@/utils/auth";
+import { removeTokenParams } from "@/utils/auth";
 import { useRouter } from "next/navigation";
 
 export default function Logout() {
@@ -16,7 +16,7 @@ export default function Logout() {
           "Access-Control-Allow-Origin": "*",
         },
       });
-      removeToken();
+      removeTokenParams();
       router.push("/");
     } catch (error) {
       console.error("# error: ", error);
