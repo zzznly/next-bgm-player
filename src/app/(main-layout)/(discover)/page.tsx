@@ -1,4 +1,4 @@
-import styles from "./page.module.scss";
+import styles from "./styles.module.scss";
 import Link from "next/link";
 import ListSection from "@/components/list-section/ListSection";
 import PlaylistService from "@/service/playlist/PlaylistService";

@@ -1,20 +1,30 @@
 import styles from "./styles.module.scss";
 import classNames from "classnames/bind";
 import ListSection from "@/components/list-section/ListSection";
+import ListItem from "@/components/list-section/list-item/ListItem";
 import CategoryService from "@/service/category/CategoryService";
 import PlaylistService from "@/service/playlist/PlaylistService";
-import ListItem from "@/components/list-section/list-item/ListItem";
+import { getDehydratedQueries, Hydrate } from "@/utils/react-query";
+import { queryOptions } from "@/service/search/queries";
 
 const cx = classNames.bind(styles);
 
-export default function SearchPage() {
+export default function SearchPage({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  // const query = getDehydratedQueries([
+  //   queryOptions.getSearchResult({ q: "", type: "album" }),
+  // ]);
+
   return (
-    <div className={styles["search-page"]}>
-      <h2 className={styles["search-page-title"]}>Search</h2>
-      <div className={styles["search-page-content"]}>
-        <SearchMain />
-      </div>
-    </div>
+    <>
+      {/* <Hydrate state={{ queries: [query] }}> */}
+      <SearchMain />
+      {children}
+      {/* </Hydrate> */}
+    </>
   );
 }
 
@@ -109,6 +119,7 @@ async function CategoriesSection() {
                         CATEGORY_BG_COLORS[idx % CATEGORY_BG_COLORS.length],
                     }}
                     className={styles["category"]}
+                    key={`category-${idx}`}
                   >
                     {name}
                   </button>
