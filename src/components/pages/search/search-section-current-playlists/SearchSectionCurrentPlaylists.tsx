@@ -5,7 +5,7 @@ import ListItem from "@/components/list-section/list-item/ListItem";
 
 const cx = classNames.bind(styles);
 
-export default async function SearchCurrentPlaylistsSection() {
+export default async function SearchSectionCurrentPlaylists() {
   const data = await PlaylistService.getCurrentPlaylists();
 
   return (

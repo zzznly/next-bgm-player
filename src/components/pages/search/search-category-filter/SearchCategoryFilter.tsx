@@ -12,7 +12,7 @@ type SearchCategoryValue = {
   path: string;
 };
 
-export default function SearchResultFilter({
+export default function SearchCategoryFilter({
   keyword = "",
   category,
 }: SearchResultParams) {
@@ -52,7 +52,7 @@ export default function SearchResultFilter({
           href={`/search/${keyword}${path && `/${path}`}`}
           className={cx(
             "search-result-filter-link",
-            `${(category ?? "") === path ? "active" : ""}`
+            `${(category || "all") === path ? "active" : ""}`
           )}
         >
           {label}

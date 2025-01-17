@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-export default async function SearchMainCategoriesSection() {
+export default async function SearchSectionCategories() {
   const data = await CategoryService.getCategories();
 
   const CATEGORY_BG_COLORS = [
