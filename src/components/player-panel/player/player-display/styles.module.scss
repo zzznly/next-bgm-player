@@ -1,0 +1,32 @@
+.player-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-album {
+    position: relative;
+    margin-top: 16px;
+    width: 200px;
+    height: 120px;
+    border-radius: 18px;
+    background-color: #d6d6d6;
+    overflow: hidden;
+  }
+
+  &-track-info {
+    margin-top: 24px;
+    text-align: center;
+  }
+  &-track-name {
+    color: #24242e;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 26px;
+  }
+  &-track-artist {
+    margin-top: 12px;
+    color: #4d4d56;
+    font-size: 16px;
+    font-weight: 400;
+  }
+}

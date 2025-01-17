@@ -1,0 +1,41 @@
+.layout {
+  position: relative;
+  width: 100%;
+  background-color: #f9f9fb;
+}
+
+.layout-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+}
+
+.content {
+  $sidebar-width: 260px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: calc(100% - $sidebar-width);
+  min-height: 100vh;
+}
+
+.body {
+  margin-top: 98px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow-y: auto;
+}
+
+.page {
+  $player-width: 392px;
+
+  padding-bottom: 150px;
+  width: calc(100% - $player-width);
+  height: 100%;
+  overflow-y: auto;
+}

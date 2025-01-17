@@ -1,0 +1,19 @@
+.sidebar-menu-item {
+  a {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 52px;
+    padding: 0 42px;
+    color: var(--mono-800);
+  }
+}
+.sidebar-menu-item.active {
+  background-color: var(--mono-010);
+  border-right: 6px solid var(--primary-010);
+
+  a {
+    color: var(--primary-010);
+    font-weight: 600;
+  }
+}

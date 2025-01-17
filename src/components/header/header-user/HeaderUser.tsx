@@ -1,12 +1,15 @@
 import styles from "./styles.module.scss";
+import SvgIcon from "@/components/svgIcon/SvgIcon";
 
-export default function HeaderUser() {
-    // const { data: { display_name } = {} } = useUserInfo();
-    
-    return (<div className={styles["header-user"]}>
-        <div className={styles["header-user-image"]}>
-            {/* <img src="" /> */}
-        </div>
-        <span className={styles["header-user-name"]}>{"displayName"}</span>
-    </div>)
+export default function HeaderUser({ userInfo }: { userInfo: any }) {
+  return (
+    <div className={styles["header-user"]}>
+      <div className={styles["header-user-image"]}>
+        {/* <SvgIcon name="artists" width={24} height={24} /> */}
+      </div>
+      <span className={styles["header-user-name"]}>
+        {userInfo?.display_name}
+      </span>
+    </div>
+  );
 }

@@ -1,6 +1,6 @@
 import "./styles.global.scss";
 import type { Metadata } from "next";
-import AppProviders from "@/providers";
+import ReactQueryProvider from "@/providers/react-query";
 
 export const metadata: Metadata = {
   title: "Truetones Player",
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppProviders>{children}</AppProviders>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );
