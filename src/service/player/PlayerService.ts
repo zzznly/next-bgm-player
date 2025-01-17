@@ -2,7 +2,7 @@ import Service from "../Service";
 
 class PlayerService extends Service {
   getPlaybackState() {
-    return this.http.get("/me/player");
+    return this.http.get<PlaybackState>("/me/player");
   }
   getCurrentPlayingTrack() {
     return this.http.get("/me/player/currently-playing");
