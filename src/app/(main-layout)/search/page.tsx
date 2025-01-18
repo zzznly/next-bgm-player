@@ -6,7 +6,7 @@ import SearchSectionCategories from "@/components/pages/search/search-section-ca
 import SearchSectionCurrentPlaylists from "@/components/pages/search/search-section-current-playlists/SearchSectionCurrentPlaylists";
 import { getDehydratedQueries, Hydrate } from "@/utils/react-query";
 import { queryOptions } from "@/service/search/queries";
-import ListItem from "@/components/list-section/list-item/ListItem";
+import ListItem from "@/components/list-item/ListItem";
 
 const cx = classNames.bind(styles);
 
