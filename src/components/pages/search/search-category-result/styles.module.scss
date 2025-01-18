@@ -1,0 +1,103 @@
+.search-category-result {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 32px;
+  width: 100%;
+}
+
+.search-category-result-wrap {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  padding: 0 24px;
+}
+
+.search-category-result-section {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  width: 100%;
+
+  &.top-result {
+    flex: 1;
+  }
+
+  &.tracks {
+    flex: 2;
+
+    .search-category-result-list {
+      // margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0;
+    }
+  }
+}
+
+.search-category-result-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 24px;
+}
+
+// .search-category-result-section {
+//   &.top-result {
+//     flex: 1;
+//   }
+//   &.tracks {
+//     flex: 2;
+
+//     .search-category-result-list {
+//       padding: 0;
+//     }
+//   }
+// }
+
+.search-category-result-card {
+  padding: 36px;
+  height: 100%;
+  background-color: #fff;
+  color: var(--font-main);
+  border-radius: 20px;
+
+  &.artists &-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 500px;
+    overflow: hidden;
+  }
+
+  &:hover {
+    background-color: #f0f0f5;
+  }
+
+  &-name {
+    margin-top: 20px;
+    color: #24242e;
+  }
+
+  &-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    > img {
+      width: 100%;
+    }
+  }
+
+  &-type {
+    display: inline-block;
+    text-align: center;
+    margin-top: 12px;
+    background-color: #f9f9fb;
+    color: #24242e;
+    padding: 6px 12px;
+    border-radius: 500px;
+  }
+}

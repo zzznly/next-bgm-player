@@ -1,7 +1,9 @@
 import styles from "./styles.module.scss";
 import classNames from "classnames/bind";
 import { convertDurationTime } from "@/utils";
+
 const cx = classNames.bind(styles);
+
 // import usePlaying from "@store/playing/usePlaying";
 
 interface TrackListItemProps {
@@ -24,6 +26,9 @@ export default function TrackListItem({
   uri,
 }: TrackListItemProps) {
   //   const { setPlayingURL } = usePlaying();
+  //   const onSetPlaying = (uri: string) => {
+  //     setPlayingUrl(uri);
+  //   };
   return (
     <li className={cx("track-item")}>
       <img className={cx("track-item-album-image")} src={imgUrl} alt="album" />
