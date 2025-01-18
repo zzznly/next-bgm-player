@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import classNames from "classnames/bind";
 import PlaylistService from "@/service/playlist/PlaylistService";
-import ListItem from "@/components/list-section/list-item/ListItem";
+import ListItem from "@/components/list-item/ListItem";
 
 const cx = classNames.bind(styles);
 

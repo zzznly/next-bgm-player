@@ -1,4 +1,4 @@
-import ListItem from "@/components/list-section/list-item/ListItem";
+import ListItem from "@/components/list-item/ListItem";
 import ListSection from "@/components/list-section/ListSection";
 import PlaylistService from "@/service/playlist/PlaylistService";
 
