@@ -1,23 +1,17 @@
-"use client";
 import styles from "./styles.module.scss";
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(styles);
 
 export default function SearchLayout({
   children,
-  searchMain,
-  searchResult,
 }: {
   children: React.ReactNode;
-  searchMain: React.ReactNode;
-  searchResult: React.ReactNode;
 }) {
   return (
-    <div className={styles["search-page"]}>
-      <h2 className={styles["search-page-title"]}>Search</h2>
-      <div className={styles["search-page-content"]}>
-        {children}
-        {searchMain}
-        {searchResult}
-      </div>
+    <div className={cx("search-page")}>
+      <h2 className={cx("search-page-title")}>Search</h2>
+      <div className={cx("search-page-content")}>{children}</div>
     </div>
   );
 }
