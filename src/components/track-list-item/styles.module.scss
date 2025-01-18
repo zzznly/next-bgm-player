@@ -1,0 +1,66 @@
+.track-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40px minmax(80px, 2fr) minmax(40px, 1fr) minmax(
+      20px,
+      0.5fr
+    );
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 16px;
+
+  &:hover {
+    background-color: #f0f0f5;
+    .track-item-info-name,
+    .track-item-info-artist {
+      color: #fff;
+    }
+  }
+}
+
+.track-item-album-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.track-item-info {
+  .track-item-info-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #24242e;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-line-clamp: 1;
+  }
+  .track-item-info-artist {
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #4d4d56;
+  }
+}
+
+.track-item-album-name {
+  color: #24242e;
+  font-size: 14px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-line-clamp: 1;
+}
+
+.track-item-runtime {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #24242e;
+}

@@ -1,7 +1,9 @@
+"use client";
+
 import styles from "./styles.module.scss";
 import classNames from "classnames/bind";
 import Link from "next/link";
-import { SearchResultParams } from "@/app/(main-layout)/search/[keyword]/[[...category]]/page";
+import { useParams } from "next/navigation";
 
 const cx = classNames.bind(styles);
 
@@ -12,10 +14,7 @@ type SearchCategoryValue = {
   path: string;
 };
 
-export default function SearchResultFilter({
-  keyword = "",
-  category,
-}: SearchResultParams) {
+export default function SearchCategoryFilter() {
   const CATEGORY: Record<SearchCategoryKey, SearchCategoryValue> = {
     ALL: {
       label: "모두",
@@ -43,6 +42,8 @@ export default function SearchResultFilter({
       path: "albums",
     },
   } as const;
+  
+  const { keyword, category } = useParams();
 
   return (
     <div className={styles["search-result-filter"]}>
@@ -52,7 +53,7 @@ export default function SearchResultFilter({
           href={`/search/${keyword}${path && `/${path}`}`}
           className={cx(
             "search-result-filter-link",
-            `${(category ?? "") === path ? "active" : ""}`
+            `${(category?.[0] ?? "") === path ? "active" : ""}`
           )}
         >
           {label}

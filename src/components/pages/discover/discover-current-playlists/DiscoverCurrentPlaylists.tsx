@@ -1,3 +1,4 @@
+import ListItem from "@/components/list-section/list-item/ListItem";
 import ListSection from "@/components/list-section/ListSection";
 import PlaylistService from "@/service/playlist/PlaylistService";
 
@@ -6,7 +7,11 @@ export default async function DiscoverCurrentPlaylists() {
 
   return (
     <>
-      <ListSection title="Playlist You Need" items={data.items} />
+      <ListSection title="Playlist You Need">
+        {data.items?.map((item: PlaylistItem) => (
+          <ListItem key={item.id} {...item} />
+        ))}
+      </ListSection>
     </>
   );
 }

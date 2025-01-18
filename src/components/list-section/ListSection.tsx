@@ -1,28 +1,19 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import ListItem from "./list-item/ListItem";
+import ListItem, { ListItemProps } from "./list-item/ListItem";
 
 export interface ListSectionProps {
   title?: string;
-  items: PlaylistItem[] | any[];
+  // items?: any[];
   hasShowMore?: boolean;
-}
-
-export interface ListItemProps {
-  id?: string;
-  name?: string;
-  title?: string;
-  description?: string;
-  uri?: string;
-  images: { url: string; width: number; height: number }[];
-  type?: string;
 }
 
 export default function ListSection({
   hasShowMore = false,
-  items,
+  // items,
   title,
-}: ListSectionProps) {
+  children,
+}: ListSectionProps & { children?: React.ReactNode }) {
   return (
     <div className={styles["section"]}>
       <ul className={styles["section-wrap"]}>
@@ -35,11 +26,7 @@ export default function ListSection({
               </Link>
             )}
           </div>
-          <div className={styles["list-content"]}>
-            {items?.map((item: ListItemProps) => (
-              <ListItem key={item.id} {...item} />
-            ))}
-          </div>
+          <div className={styles["list-content"]}>{children}</div>
         </div>
       </ul>
     </div>

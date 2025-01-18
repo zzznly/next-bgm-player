@@ -1,8 +1,15 @@
 .search-result-filter {
   padding: 0 42px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .search-result-filter-link {
-  padding: 6px 14px;
+  padding: 0 14px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 32px;
   font-size: 14px;
   font-weight: 400;

@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(styles);
 
-export default async function SearchMainCategoriesSection() {
+export default async function SearchSectionCategories() {
   const data = await CategoryService.getCategories();
 
   const CATEGORY_BG_COLORS = [
@@ -21,11 +21,11 @@ export default async function SearchMainCategoriesSection() {
 
   return (
     <div className={cx("search-section", "categories")}>
-      <div className={styles["section"]}>
-        <div className={styles["section-wrap"]}>
-          <div className={styles["list"]}>
-            <h2 className={styles["list-title"]}>Hot Categories</h2>
-            <div className={styles["list-content"]}>
+      <div className={cx("section")}>
+        <div className={cx("section-wrap")}>
+          <div className={cx("list")}>
+            <h2 className={cx("list-title")}>Hot Categories</h2>
+            <div className={cx("list-content")}>
               {data?.categories?.items
                 ?.sort(() => Math.random() - 0.5)
                 .map(({ name }: CategoriesItem, idx: number) => (
@@ -34,7 +34,7 @@ export default async function SearchMainCategoriesSection() {
                       backgroundColor:
                         CATEGORY_BG_COLORS[idx % CATEGORY_BG_COLORS.length],
                     }}
-                    className={styles["category"]}
+                    className={cx("category")}
                     key={`category-${idx}`}
                   >
                     {name}
