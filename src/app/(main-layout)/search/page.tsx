@@ -6,6 +6,7 @@ import SearchSectionCategories from "@/components/pages/search/search-section-ca
 import SearchSectionCurrentPlaylists from "@/components/pages/search/search-section-current-playlists/SearchSectionCurrentPlaylists";
 import { getDehydratedQueries, Hydrate } from "@/utils/react-query";
 import { queryOptions } from "@/service/search/queries";
+import ListItem from "@/components/list-section/list-item/ListItem";
 
 const cx = classNames.bind(styles);
 
@@ -14,21 +15,23 @@ export default async function SearchMainPage() {
   return (
     <>
       <div className={cx("search-main")}>
-        <ListSection
-          title="New Release"
-          items={(data as NewReleaseAlbumsResponse)?.albums?.items
+        <ListSection title="New Release">
+          {(data as NewReleaseAlbumsResponse)?.albums?.items
             ?.sort(() => Math.random() - 0.5)
             .slice(0, 10)
-            .map(
-              ({ name, images, uri, type, artists }: NewReleaseAlbumItem) => ({
-                uri,
-                type,
-                images,
-                name,
-                description: artists[0].name,
-              })
-            )}
-        />
+            .map((item: NewReleaseAlbumItem, idx: number) => (
+              <ListItem
+                key={idx}
+                {...{
+                  name: item?.name,
+                  images: item?.images,
+                  description: item?.artists[0].name,
+                  uri: item?.uri,
+                  type: item?.type,
+                }}
+              />
+            ))}
+        </ListSection>
         <div className={cx("search-main-row")}>
           <SearchSectionCurrentPlaylists />
           <SearchSectionCategories />
