@@ -11,7 +11,15 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    domains: ["i.scdn.co"],
+    domains: [
+      "i.scdn.co",
+      "t.scdn.co",
+      "charts-images.scdn.co",
+      "dummyimage.com",
+      "mosaic.scdn.co",
+      "image-cdn-ak.spotifycdn.com",
+      "image-cdn-fa.spotifycdn.com",
+    ],
   },
 };
 
