@@ -5,7 +5,7 @@ const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
 
-export async function GET(req: Request) {
+export async function GET(req: Request, res: Response) {
   const { searchParams } = new URL(req.url);
   const code = searchParams.get("code");
   const state = searchParams.get("state");
@@ -35,11 +35,28 @@ export async function GET(req: Request) {
     }
 
     const data = await response.json();
-    return new Response(JSON.stringify(data), {
-      headers: {
-        "Set-Cookie": `refresh_token=${data.refresh_token}; Path=/; Max-Age=2592000; HttpOnly; Secure; SameSite=Lax`,
-      },
+
+    setCookie("refresh_token", data.refresh_token, {
+      req,
+      res: NextResponse.next(),
+      path: "/",
+      maxAge: 2592000, // 30일
+      httpOnly: true,
+      secure: true, //process.env.NODE_ENV === "production"
+      sameSite: "lax",
     });
+
+    setCookie("access_token", data.access_token, {
+      req,
+      res: NextResponse.next(),
+      path: "/",
+      maxAge: 3600,
+      httpOnly: false, // Allow client access
+      secure: false, //process.env.NODE_ENV === "production"
+      sameSite: "lax",
+    });
+
+    return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to fetch tokens" },
