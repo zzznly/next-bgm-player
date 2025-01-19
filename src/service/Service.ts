@@ -43,17 +43,6 @@ export default class Service {
     console.log("### cookies: ", this.cookies);
 
     try {
-      // 토큰 만료시 refresh
-      const currentTime = new Date().getTime();
-      const timeDifference = currentTime - this.tokenGenerateTime;
-      const expiresIn = this.cookies.get("expires_in")?.value;
-
-      if (timeDifference >= Number(expiresIn)) {
-        console.log("!!! Token Expired !!! :", timeDifference);
-        this.tokenGenerateTime = currentTime;
-        await this.tokenRefresh();
-      }
-
       const accessToken = this.cookies.get("access_token")?.value;
       const response = await fetch(this.baseURL + url, {
         method,
@@ -69,7 +58,23 @@ export default class Service {
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        switch (response.status) {
+          case 401:
+            // 토큰 만료시 refresh
+            const currentTime = new Date().getTime();
+            const timeDifference = currentTime - this.tokenGenerateTime;
+            const expiresIn = this.cookies.get("expires_in")?.value;
+
+            if (timeDifference >= Number(expiresIn) * 1000) {
+              console.log("!!! Token Expired !!! :", timeDifference);
+              this.tokenGenerateTime = currentTime;
+              await this.tokenRefresh();
+            }
+
+            return this.request<T>(method, url, data, config);
+          default:
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
       }
 
       const responseData: T = await response.json();

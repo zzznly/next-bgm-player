@@ -14,35 +14,35 @@ type SearchCategoryValue = {
   path: string;
 };
 
+const CATEGORY: Record<SearchCategoryKey, SearchCategoryValue> = {
+  ALL: {
+    label: "모두",
+    params: "track,playlist,artist,album",
+    path: "",
+  },
+  TRACK: {
+    label: "곡",
+    params: "track",
+    path: "tracks",
+  },
+  PLAYLIST: {
+    label: "플레이리스트",
+    params: "playlist",
+    path: "playlists",
+  },
+  ARTIST: {
+    label: "아티스트",
+    params: "artist",
+    path: "artists",
+  },
+  ALBUM: {
+    label: "앨범",
+    params: "album",
+    path: "albums",
+  },
+} as const;
+
 export default function SearchCategoryFilter() {
-  const CATEGORY: Record<SearchCategoryKey, SearchCategoryValue> = {
-    ALL: {
-      label: "모두",
-      params: "track,playlist,artist,album",
-      path: "",
-    },
-    TRACK: {
-      label: "곡",
-      params: "track",
-      path: "tracks",
-    },
-    PLAYLIST: {
-      label: "플레이리스트",
-      params: "playlist",
-      path: "playlists",
-    },
-    ARTIST: {
-      label: "아티스트",
-      params: "artist",
-      path: "artists",
-    },
-    ALBUM: {
-      label: "앨범",
-      params: "album",
-      path: "albums",
-    },
-  } as const;
-  
   const { keyword, category } = useParams();
 
   return (

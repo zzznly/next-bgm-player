@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 
 // import usePlaying from "@store/playing/usePlaying";
 
-interface TrackListItemProps {
+interface TrackItemProps {
   idx?: number;
   id: number;
   imgUrl: string;
@@ -16,7 +16,7 @@ interface TrackListItemProps {
   durationTime: string;
   uri: string;
 }
-export default function TrackListItem({
+export default function TrackItem({
   id,
   imgUrl,
   name,
@@ -24,7 +24,7 @@ export default function TrackListItem({
   album,
   durationTime,
   uri,
-}: TrackListItemProps) {
+}: TrackItemProps) {
   //   const { setPlayingURL } = usePlaying();
   //   const onSetPlaying = (uri: string) => {
   //     setPlayingUrl(uri);
