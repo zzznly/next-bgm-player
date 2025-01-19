@@ -11,19 +11,33 @@ export const removeAccessToken = () => {
 export const saveTokenParams = (params: any) => {
   setCookie("access_token", params.access_token ?? "");
   setCookie("expires_in", params.expires_in ?? "");
-  // if (params?.refresh_token) {
-  //   setCookie("refresh_token", params?.refresh_token, {
-  //     path: "/",
-  //     httpOnly: true,
-  //     secure: true,
-  //     maxAge: 60 * 60 * 24 * 30,
-  //     sameSite: "lax",
-  //   });
-  // }
 };
 
 export const removeTokenParams = () => {
   deleteCookie("access_token");
   deleteCookie("expires_in");
   deleteCookie("refresh_token");
+};
+
+export const getSpotifyAuthUrl = () => {
+  const params = {
+    response_type: "token",
+    client_id: process.env.SPOTIFY_CLIENT_ID,
+    redirect_uri: process.env.SPOTIFY_REDIRECT_URI,
+    scope: [
+      "user-read-currently-playing",
+      "user-read-recently-played",
+      "user-read-playback-state",
+      "user-top-read",
+      "user-modify-playback-state",
+      "streaming",
+      "user-read-email",
+      "user-read-private",
+    ].join("%20"),
+    show_dialog: "true",
+  };
+
+  return `${process.env.SPOTIFY_AUTHORIZE_URL}?${new URLSearchParams(
+    params
+  ).toString()}`;
 };
