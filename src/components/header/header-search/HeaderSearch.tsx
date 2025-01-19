@@ -12,7 +12,7 @@ export default function HeaderSearch() {
   const pathname = usePathname();
 
   const [keyword, setKeyword] = useState("");
-  const debouncedKeyword = useDebounce(keyword, 500);
+  const debouncedKeyword = useDebounce(keyword, 300);
 
   useEffect(() => {
     if (!params?.keyword) return;
