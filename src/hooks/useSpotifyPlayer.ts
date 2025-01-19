@@ -1,8 +1,12 @@
-import { getCookieString } from "@/utils";
+import { getClientSideCookieValue } from "@/utils/cookies.client";
 import { useEffect } from "react";
 
 export default function useSpotifyPlayer() {
-  const token = getCookieString("access_token");
+  const getToken = async () => {
+    const accessToken = await getClientSideCookieValue("access_token");
+    return accessToken;
+  };
+  const token = getToken();
 
   useEffect(() => {
     if (!token) return;
@@ -18,7 +22,7 @@ export default function useSpotifyPlayer() {
       playerInstance = new (window as any).Spotify.Player({
         name: "Web Playback SDK",
         getOAuthToken: (cb: any) => {
-          cb(token?.replace(/\"/g, ""));
+          cb(JSON.stringify(token).replace(/\"/g, ""));
         },
         volume: 0.5,
       });
