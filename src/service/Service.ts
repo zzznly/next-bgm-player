@@ -1,6 +1,12 @@
 import { removeAccessToken, saveAccessToken } from "@/utils/auth";
-import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
-import { cookies } from "next/headers";
+import {
+  getClientSideCookies,
+  getClientSideCookieValue,
+} from "@/utils/cookies.client";
+import {
+  getServerSideCookies,
+  getServerSideCookieValue,
+} from "@/utils/cookies.server";
 
 interface HTTPInstance {
   get<T>(url: string, config?: RequestInit): Promise<T>;
@@ -14,8 +20,9 @@ export default class Service {
   public http: HTTPInstance;
   private baseURL: string;
   private headers: Record<string, string>;
-  private cookies: ReadonlyRequestCookies | undefined;
+  private cookies: any;
   private tokenGenerateTime: number;
+  private accessToken: string | undefined;
 
   constructor() {
     this.baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
@@ -39,17 +46,23 @@ export default class Service {
     data?: unknown,
     config?: RequestInit
   ): Promise<T> {
-    this.cookies = await cookies();
-    console.log("### cookies: ", this.cookies);
-
     try {
-      const accessToken = this.cookies.get("access_token")?.value;
+      const isClientSide = typeof window !== "undefined";
+      this.cookies = isClientSide
+        ? await getClientSideCookies()
+        : await getServerSideCookies();
+      this.accessToken = isClientSide
+        ? await getClientSideCookieValue("access_token")
+        : await getServerSideCookieValue("access_token");
+      // console.log("### cookies: ", this.cookies);
+      // console.log("### access token: ", this.accessToken);
+
       const response = await fetch(this.baseURL + url, {
         method,
         headers: {
           ...this.headers,
           "Content-Type": "application/json",
-          Authorization: accessToken && `Bearer ${accessToken}`,
+          Authorization: this.accessToken && `Bearer ${this.accessToken}`,
           ...config?.headers,
         },
         body: data ? JSON.stringify(data) : undefined,
@@ -63,7 +76,7 @@ export default class Service {
             // 토큰 만료시 refresh
             const currentTime = new Date().getTime();
             const timeDifference = currentTime - this.tokenGenerateTime;
-            const expiresIn = this.cookies.get("expires_in")?.value;
+            const expiresIn = this.cookies.expires_in;
 
             if (timeDifference >= Number(expiresIn) * 1000) {
               console.log("!!! Token Expired !!! :", timeDifference);
@@ -115,11 +128,10 @@ export default class Service {
 
   private async tokenRefresh() {
     try {
-      const refreshToken = this.cookies?.get("refresh_token")?.value;
       const response = await fetch(this.baseURL + `/auth/refresh`, {
         method: "POST",
         body: JSON.stringify({
-          refresh_token: refreshToken,
+          refresh_token: this.cookies.refresh_token,
         }),
       });
 
