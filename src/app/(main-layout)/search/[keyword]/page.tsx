@@ -14,9 +14,10 @@ export default async function SearchKeywordResultPage({
   params: { keyword: string };
 }) {
   const { keyword } = await params;
+
   const data = await SearchService.getSearchResult({
     q: keyword,
-    type: "playlist,album,artist,track",
+    type: "playlist,track,album,artist",
   });
   console.log("## search data: ", data);
 
@@ -66,23 +67,25 @@ export default async function SearchKeywordResultPage({
             </div>
           </div>
         </div>
-        {["albums", "artists", "playlists"].map((key: string, idx: number) => (
-          <div className={cx("search-category-result-section", key)}>
-            <ListSection title={key} key={`key-${idx}`}>
-              {data?.[key]?.items?.map((item: any, idx: number) => (
-                <ListItem
-                  key={idx}
-                  {...{
-                    name: item?.name,
-                    images: item?.images,
-                    description: item?.type,
-                    uri: item?.uri,
-                  }}
-                />
-              ))}
-            </ListSection>
-          </div>
-        ))}
+        <div className={cx("search-category-result-section")}>
+          {["albums", "artists", "playlists"].map(
+            (key: string, idx: number) => (
+              <ListSection title={key} key={`key-${idx}`}>
+                {data?.[key]?.items?.map((item: any, idx: number) => (
+                  <ListItem
+                    key={idx}
+                    {...{
+                      name: item?.name,
+                      images: item?.images,
+                      description: item?.type,
+                      uri: item?.uri,
+                    }}
+                  />
+                ))}
+              </ListSection>
+            )
+          )}
+        </div>
       </div>
     </>
   );
