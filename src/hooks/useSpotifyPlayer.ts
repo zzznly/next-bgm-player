@@ -22,7 +22,7 @@ export default function useSpotifyPlayer() {
       playerInstance = new (window as any).Spotify.Player({
         name: "Web Playback SDK",
         getOAuthToken: (cb: any) => {
-          cb(token?.replace(/\"/g, ""));
+          cb(JSON.stringify(token).replace(/\"/g, ""));
         },
         volume: 0.5,
       });
